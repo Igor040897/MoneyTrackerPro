@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MoneyTrackerPro</string>
+    <string name="hello_world">Hello World!</string>
 </resources>
