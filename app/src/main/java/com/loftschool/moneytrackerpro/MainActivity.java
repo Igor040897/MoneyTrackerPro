@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         final EditText price = (EditText) findViewById(R.id.price);
         final TextView add = (TextView) findViewById(R.id.add);
 
-        name.addTextChangedListener(new TextWatcher() {
+        TextWatcher textWatcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -27,32 +27,17 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                add.setEnabled(!TextUtils.isEmpty(s) && !(price.length() == 0));
+                add.setEnabled(!TextUtils.isEmpty(name.getText().toString()) && !TextUtils.isEmpty(price.getText().toString()));
             }
 
             @Override
             public void afterTextChanged(Editable s) {
 
             }
-        });
+        };
 
-
-        price.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                add.setEnabled(!TextUtils.isEmpty(s) && !(name.length() == 0));
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
+        name.addTextChangedListener(textWatcher);
+        price.addTextChangedListener(textWatcher);
     }
 
     @Override
