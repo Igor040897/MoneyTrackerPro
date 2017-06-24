@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="text_smallSizeSP">20sp</dimen>
+    <dimen name="text_small_size">20sp</dimen>
     <dimen name="margin_l">16dp</dimen>
-    <dimen name="nullDP">0dp</dimen>
 </resources>

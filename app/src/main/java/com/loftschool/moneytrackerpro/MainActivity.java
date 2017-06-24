@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                add.setEnabled(!TextUtils.isEmpty(name.getText().toString()) && !TextUtils.isEmpty(price.getText().toString()));
+                add.setEnabled(!TextUtils.isEmpty(name.getText()) && !TextUtils.isEmpty(price.getText()));
             }
 
             @Override
