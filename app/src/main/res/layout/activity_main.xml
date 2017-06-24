@@ -13,7 +13,8 @@
         android:background="@android:color/white"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingLeft="23dp">
+        android:paddingLeft="23dp"
+        android:paddingRight="23dp">
 
 
         <EditText
@@ -53,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:enabled="false"
-            android:paddingEnd="@dimen/margin_l"
+            android:paddingEnd="0dp"
             android:paddingStart="@dimen/margin_l"
             android:text="+"
             android:textSize="40sp"
