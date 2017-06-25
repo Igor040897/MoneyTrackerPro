@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_pattern"
-    android:padding="@dimen/margin_small">
+    android:padding="@dimen/margin_small"
+    android:layout_marginTop="@dimen/margin_small">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/items"
