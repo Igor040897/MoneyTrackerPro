@@ -6,4 +6,6 @@
     <color name="color_very_light_blue">#84c0c5</color>
     <color name="color_light_gray">#a9a9a9</color>
     <color name="color_gray">#95989a</color>
+    <color name="color_dark_yellow">#E6AE1E</color>
+    <color name="color_light_yellow">#FCC418</color>
 </resources>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/margin_little"
+    android:paddingTop="@dimen/margin_little">
+
+    <RelativeLayout
+        android:id="@+id/item_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/name"
+            style="@style/Text.Item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@+id/price"
+            android:background="@color/color_light_yellow"
+            tools:text="Сковородка с антипригарним покрытиям" />
+
+        <TextView
+            android:id="@+id/price"
+            style="@style/Text.Item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/name"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/name"
+            android:background="@color/color_dark_yellow"
+            android:gravity="center_vertical"
+            android:textStyle="bold"
+            tools:text="50" />
+    </RelativeLayout>
+</FrameLayout>
