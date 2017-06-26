@@ -52,8 +52,7 @@ public class MainActivity extends AppCompatActivity {
         public void onBindViewHolder(ItemViewHolder holder, int position) {
             final Item item = items.get(position);
             holder.name.setText(item.name);
-            holder.price.setText(String.valueOf(item.price));
-            holder.price.append(" \u20bd");
+            holder.price.setText((String.valueOf(item.price) + " \u20bd"));
         }
 
         @Override
