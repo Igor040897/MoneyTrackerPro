@@ -30,9 +30,6 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-
-
-            String name_page = (String) getPageTitle(position);
             if (position != 2) {
                 final ItemsFragment fragment = new ItemsFragment();
                 Bundle args = new Bundle();
@@ -47,10 +44,7 @@ public class MainActivity extends AppCompatActivity {
                 fragment.setArguments(args);
                 return fragment;
             }
-
-            final BalanceFragment fragment = new BalanceFragment();
-
-            return fragment;
+            return new BalanceFragment();
         }
 
         @Override
