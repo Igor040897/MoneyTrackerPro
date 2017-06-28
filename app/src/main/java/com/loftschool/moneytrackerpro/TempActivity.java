@@ -13,7 +13,7 @@ public class TempActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_add);
 
         final EditText name = (EditText) findViewById(R.id.name);
         final EditText price = (EditText) findViewById(R.id.price);
