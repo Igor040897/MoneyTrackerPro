@@ -30,21 +30,21 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            if (position != 2) {
-                final ItemsFragment fragment = new ItemsFragment();
-                Bundle args = new Bundle();
-                switch (position) {
-                    case 0:
-                        args.putString(ItemsFragment.ARG_TYPE, Item.TYPE_EXPENSE);
-                        break;
-                    case 1:
-                        args.putString(ItemsFragment.ARG_TYPE, Item.TYPE_INCOME);
-                        break;
-                }
-                fragment.setArguments(args);
-                return fragment;
+            final ItemsFragment fragment = new ItemsFragment();
+            Bundle args = new Bundle();
+            switch (position) {
+                case 0:
+                    args.putString(ItemsFragment.ARG_TYPE, Item.TYPE_EXPENSE);
+                    fragment.setArguments(args);
+                    return fragment;
+                case 1:
+                    args.putString(ItemsFragment.ARG_TYPE, Item.TYPE_INCOME);
+                    fragment.setArguments(args);
+                    return fragment;
+                case 2:
+                    return new BalanceFragment();
             }
-            return new BalanceFragment();
+            return null;
         }
 
         @Override

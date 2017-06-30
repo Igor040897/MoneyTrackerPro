@@ -27,7 +27,7 @@ public class ItemsFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         final RecyclerView items = (RecyclerView) view.findViewById(R.id.items);
-        items.setAdapter(new ItemsAdapter(view));
+        items.setAdapter(new ItemsAdapter());
 
         type = getArguments().getString(ARG_TYPE);
     }

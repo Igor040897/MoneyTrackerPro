@@ -14,10 +14,8 @@ import java.util.List;
  */
 class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHolder> {
     final List<Item> items = new ArrayList<>();
-    private View view;
 
-    ItemsAdapter(View current) {
-        this.view = current;
+    ItemsAdapter() {
 
         items.add(new Item("Сковородка с \n" +
                 "антипригарным\n" +
@@ -45,8 +43,7 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHolder> {
     public void onBindViewHolder(ItemViewHolder holder, int position) {
         final Item item = items.get(position);
         holder.name.setText(item.name);
-        holder.price.setText(item.price + " " + view.getResources().getString(R.string.rouble));
-
+        holder.price.setText(item.price + " " + holder.itemView.getResources().getString(R.string.rouble));
     }
 
     @Override
