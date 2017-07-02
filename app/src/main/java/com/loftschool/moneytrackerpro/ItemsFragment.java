@@ -1,5 +1,6 @@
 package com.loftschool.moneytrackerpro;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,6 +19,9 @@ import com.loftschool.moneytrackerpro.API.LSApi;
 import java.io.IOException;
 import java.util.List;
 
+import static android.app.Activity.RESULT_OK;
+import static com.loftschool.moneytrackerpro.AddItemActivity.RC_ADD_ITEM;
+
 /**
  * Created by fanre on 6/27/2017.
  */
@@ -32,6 +36,7 @@ public class ItemsFragment extends Fragment {
 
     private String type;
     private LSApi api;
+    private View add;
 
     @Nullable
     @Override
@@ -45,6 +50,15 @@ public class ItemsFragment extends Fragment {
         final RecyclerView items = (RecyclerView) view.findViewById(R.id.items);
         items.setAdapter(adapter);
 
+        add = view.findViewById(R.id.add);
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), AddItemActivity.class);
+                intent.putExtra(AddItemActivity.EXTRA_TYPE, type);
+                startActivityForResult(intent, RC_ADD_ITEM);
+            }
+        });
         type = getArguments().getString(ARG_TYPE);
         api = ((LSApp) getActivity().getApplication()).api();
 
@@ -116,5 +130,12 @@ public class ItemsFragment extends Fragment {
             public void onLoaderReset(Loader<List<Item>> loader) {
             }
         }).forceLoad();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == RC_ADD_ITEM && resultCode == RESULT_OK) {
+            Item item = (Item) data.getSerializableExtra(AddItemActivity.RESULT_ITEM);
+        }
     }
 }
