@@ -49,10 +49,10 @@ public class ItemsFragment extends Fragment {
         api = ((LSApp) getActivity().getApplication()).api();
 
         LoadItems();
-        LoadItem();
+        addItem();
     }
 
-    private void LoadItem() {
+    private void addItem() {
         getLoaderManager().initLoader(LODER_ADD, null, new LoaderManager.LoaderCallbacks<AddResult>() {
 
             @Override
