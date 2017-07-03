@@ -13,7 +13,7 @@ import android.widget.TextView;
 public class AddItemActivity extends AppCompatActivity {
     public static final String EXTRA_TYPE = "type";
     public static final String RESULT_ITEM = "item";
-    public static final int RC_ADD_ITEM = 90;
+    public static final int RC_ADD_ITEM = 99;
     private String type;
 
     @Override

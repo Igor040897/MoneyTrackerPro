@@ -5,4 +5,5 @@
     <dimen name="margin_large">26dp</dimen>
     <dimen name="margin_small">10dp</dimen>
     <dimen name="margin_little">5dp</dimen>
+    <dimen name="margin_medium">13dp</dimen>
 </resources>

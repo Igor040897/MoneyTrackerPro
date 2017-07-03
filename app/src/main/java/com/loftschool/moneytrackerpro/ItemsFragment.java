@@ -62,11 +62,11 @@ public class ItemsFragment extends Fragment {
         type = getArguments().getString(ARG_TYPE);
         api = ((LSApp) getActivity().getApplication()).api();
 
-        LoadItems();
-        LoadItem();
+        loadItems();
+        addItem();
     }
 
-    private void LoadItem() {
+    private void addItem() {
         getLoaderManager().initLoader(LODER_ADD, null, new LoaderManager.LoaderCallbacks<AddResult>() {
 
             @Override
@@ -99,7 +99,7 @@ public class ItemsFragment extends Fragment {
         });
     }
 
-    private void LoadItems() {
+    private void loadItems() {
         getLoaderManager().initLoader(LODER_ITEMS, null, new LoaderManager.LoaderCallbacks<List<Item>>() {
             @Override
             public Loader<List<Item>> onCreateLoader(int id, Bundle args) {
@@ -135,7 +135,7 @@ public class ItemsFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == RC_ADD_ITEM && resultCode == RESULT_OK) {
-            Item item = (Item) data.getSerializableExtra(AddItemActivity.RESULT_ITEM);
+            Item item = (Item) data.getParcelableExtra(AddItemActivity.RESULT_ITEM);
         }
     }
 }
