@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.loftschool.moneytrackerpro.API.AddResult;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,25 +16,6 @@ import java.util.List;
  */
 class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHolder> {
     final List<Item> items = new ArrayList<>();
-
-    ItemsAdapter() {
-
-        items.add(new Item("Сковородка с \n" +
-                "антипригарным\n" +
-                "покрытием", 400000));
-        items.add(new Item("car", 100));
-        items.add(new Item("apple", 400000));
-        items.add(new Item("car", 100));
-        items.add(new Item("apple", 400000));
-        items.add(new Item("car", 100));
-        items.add(new Item("apple", 400000));
-        items.add(new Item("car", 100));
-        items.add(new Item("apple", 400000));
-        items.add(new Item("car", 100));
-        items.add(new Item("apple", 400000));
-        items.add(new Item("car", 100));
-        items.add(new Item("apple", 400000));
-    }
 
     @Override
     public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -49,6 +32,20 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHolder> {
     @Override
     public int getItemCount() {
         return items.size();
+    }
+
+    public void clear() {
+        items.clear();
+    }
+
+    public void addAll(List<Item> items) {
+        this.items.addAll(items);
+        notifyDataSetChanged();
+    }
+
+    public void add(AddResult data) {
+        data.isSuccess();
+        notifyDataSetChanged();
     }
 
     class ItemViewHolder extends RecyclerView.ViewHolder {
