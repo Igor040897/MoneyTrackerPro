@@ -3,6 +3,7 @@ package com.loftschool.moneytrackerpro;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
@@ -36,7 +37,7 @@ public class ItemsFragment extends Fragment {
 
     private String type;
     private LSApi api;
-    private View add;
+    private FloatingActionButton add;
 
     @Nullable
     @Override
@@ -50,7 +51,7 @@ public class ItemsFragment extends Fragment {
         final RecyclerView items = (RecyclerView) view.findViewById(R.id.items);
         items.setAdapter(adapter);
 
-        add = view.findViewById(R.id.add);
+        add = (FloatingActionButton) view.findViewById(R.id.add);
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,7 +64,6 @@ public class ItemsFragment extends Fragment {
         api = ((LSApp) getActivity().getApplication()).api();
 
         loadItems();
-        addItem();
     }
 
     private void addItem() {
@@ -136,6 +136,7 @@ public class ItemsFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == RC_ADD_ITEM && resultCode == RESULT_OK) {
             Item item = (Item) data.getParcelableExtra(AddItemActivity.RESULT_ITEM);
+            Toast.makeText(getContext(), item.name, Toast.LENGTH_LONG).show();
         }
     }
 }

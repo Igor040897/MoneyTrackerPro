@@ -23,9 +23,9 @@ public class Item implements Parcelable {
 
     private Item(Parcel in) {
         name = in.readString();
+        price = in.readInt();
         type = in.readString();
         id = in.readInt();
-        price = in.readInt();
     }
 
     public static final Creator<Item> CREATOR = new Creator<Item>() {
@@ -50,5 +50,6 @@ public class Item implements Parcelable {
         dest.writeString(name);
         dest.writeInt(price);
         dest.writeString(type);
+        dest.writeInt(id);
     }
 }
