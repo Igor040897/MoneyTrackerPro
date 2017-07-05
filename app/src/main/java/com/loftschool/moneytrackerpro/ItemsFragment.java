@@ -3,7 +3,6 @@ package com.loftschool.moneytrackerpro;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
@@ -38,6 +37,56 @@ public class ItemsFragment extends Fragment {
     private String type;
     private LSApi api;
     private FloatingActionButton add;
+    private ActionMode actionMode;
+    private ActionMode.Callback actionModeCallback = new ActionMode.Callback() {
+        @Override
+        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+            mode.getMenuInflater().inflate(R.menu.items, menu);
+            return true;
+        }
+
+        @Override
+        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+            return false;
+        }
+
+        @Override
+        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.menu_remove:
+                    new AlertDialog.Builder(getContext())
+                            .setTitle(R.string.app_name)
+                            .setMessage(R.string.confirm_remove)
+                            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int id) {
+                                    for (Integer selectedItemId : adapter.getSelectedItems())
+                                        removeItem();
+                                }
+                            })
+                            .setNegativeButton(android.R.string.cancel, null)
+                            .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                @Override
+                                public void onDismiss(DialogInterface dialog) {
+                                    actionMode.finish();
+                                }
+                            })
+                            .show();
+                    return true;
+            }
+            return false;
+        }
+
+        private void removeItem() {
+
+        }
+
+        @Override
+        public void onDestroyActionMode(ActionMode mode) {
+            actionMode = null;
+            adapter.clearSelections();
+        }
+    };
 
     @Nullable
     @Override
@@ -51,6 +100,26 @@ public class ItemsFragment extends Fragment {
         final RecyclerView items = (RecyclerView) view.findViewById(R.id.items);
         items.setAdapter(adapter);
 
+            @Override
+            public boolean onSingleTapConfirmed(MotionEvent e) {
+                toggleSelection(e, items);
+                return super.onSingleTapConfirmed(e);
+            }
+        });
+        items.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return gestureDetector.onTouchEvent(event);
+            }
+        });
+
+        SwipeRefreshLayout refresh = (SwipeRefreshLayout) view.findViewById(R.id.refresh);
+        refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadItems();
+            }
+        });
         add = (FloatingActionButton) view.findViewById(R.id.add);
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +133,7 @@ public class ItemsFragment extends Fragment {
         api = ((LSApp) getActivity().getApplication()).api();
 
         loadItems();
+        addItem();
     }
 
     private void addItem() {
@@ -136,7 +206,6 @@ public class ItemsFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == RC_ADD_ITEM && resultCode == RESULT_OK) {
             Item item = (Item) data.getParcelableExtra(AddItemActivity.RESULT_ITEM);
-            Toast.makeText(getContext(), item.name, Toast.LENGTH_LONG).show();
         }
     }
 }
