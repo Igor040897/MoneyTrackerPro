@@ -63,7 +63,7 @@ public class ItemsFragment extends Fragment {
         type = getArguments().getString(ARG_TYPE);
         api = ((LSApp) getActivity().getApplication()).api();
 
-        loadItems();
+        loadItems();     
     }
 
     private void addItem() {
