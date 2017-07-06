@@ -51,6 +51,12 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHolder> {
         notifyDataSetChanged();
     }
 
+    Item remove(int pos) {
+        final Item item = items.remove(pos);
+        notifyItemRemoved(pos);
+        return item;
+    }
+
     void toggleSelection(int pos) {
         if (selectedItems.get(pos, false)) {
             selectedItems.delete(pos);
