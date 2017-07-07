@@ -54,6 +54,7 @@ public class ItemsFragment extends Fragment {
         @Override
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
             mode.getMenuInflater().inflate(R.menu.items, menu);
+            add.hide();
             return true;
         }
 
@@ -115,13 +116,14 @@ public class ItemsFragment extends Fragment {
                 if (actionMode == null) {
                     actionMode = ((AppCompatActivity) getActivity()).startSupportActionMode(actionModeCallback);
                     toggleSelection(e, items);
-                    add.hide();
                 }
             }
 
             @Override
             public boolean onSingleTapConfirmed(MotionEvent e) {
-                toggleSelection(e, items);
+                if (actionMode != null) {
+                    toggleSelection(e, items);
+                }
                 return super.onSingleTapConfirmed(e);
             }
         });
@@ -158,6 +160,7 @@ public class ItemsFragment extends Fragment {
 
     private void toggleSelection(MotionEvent e, RecyclerView items) {
         adapter.toggleSelection(items.getChildLayoutPosition(items.findChildViewUnder(e.getX(), e.getY())));
+        actionMode.setTitle(adapter.getSelectedItems().size() + " выбрано");
     }
 
     private void addItem() {
