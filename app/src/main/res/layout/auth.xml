@@ -1,12 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/balance"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
 
-    <Button
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="Logo"
+        android:src="@drawable/logo" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/auth"
+        android:layout_marginBottom="30dp"
+        android:textColor="@android:color/white"
+        android:gravity="center"
+        android:text="@string/info" />
+
+    <ImageView
         android:id="@+id/auth"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="auth" />
-</LinearLayout>
+        android:layout_above="@+id/intro"
+        android:layout_marginBottom="20dp"
+        android:contentDescription="Authorization"
+        android:src="@drawable/gplus_button" />
+
+    <ImageView
+        android:id="@+id/intro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:contentDescription="Intro"
+        android:src="@drawable/bg_intro" />
+</RelativeLayout>

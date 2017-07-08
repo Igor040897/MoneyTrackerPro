@@ -1,10 +1,11 @@
 <resources>
-    <string name="app_name">MoneyTrackerPro</string>
+    <string name="app_name">Учёт бюджета</string>
     <string name="name_hint">Название</string>
     <string name="rouble">\u20bd</string>
 
     <string name="expenses">расходы</string>
     <string name="incomes">доходы</string>
+    <string name="info">Ваш незаменимый помощник \n в управлении бюджетом</string>
     <string name="balance">Баланс</string>
     <string name="error">Произошла ошибка</string>
     <string name="new_item">Новая запись</string>
