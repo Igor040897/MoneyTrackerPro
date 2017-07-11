@@ -9,6 +9,7 @@
         android:id="@+id/logo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="46dp"
         android:contentDescription="Logo"
         android:src="@drawable/logo" />
 
@@ -36,5 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:contentDescription="Intro"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
         android:src="@drawable/bg_intro" />
 </RelativeLayout>
