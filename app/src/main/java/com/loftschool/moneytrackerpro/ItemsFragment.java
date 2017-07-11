@@ -1,5 +1,6 @@
 package com.loftschool.moneytrackerpro;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,14 +9,23 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.ActionMode;
 import android.support.v7.widget.RecyclerView;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.loftschool.moneytrackerpro.API.AddResult;
 import com.loftschool.moneytrackerpro.API.LSApi;
+import com.loftschool.moneytrackerpro.API.Result;
 
 import java.io.IOException;
 import java.util.List;
@@ -38,6 +48,55 @@ public class ItemsFragment extends Fragment {
     private String type;
     private LSApi api;
     private FloatingActionButton add;
+    private ActionMode actionMode;
+    private SwipeRefreshLayout refresh;
+    private ActionMode.Callback actionModeCallback = new ActionMode.Callback() {
+        @Override
+        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+            mode.getMenuInflater().inflate(R.menu.items, menu);
+            add.hide();
+            return true;
+        }
+
+        @Override
+        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+            return false;
+        }
+
+        @Override
+        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.menu_remove:
+                    new AlertDialog.Builder(getContext())
+                            .setTitle(R.string.app_name)
+                            .setMessage(R.string.confirm_remove)
+                            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int id) {
+                                    for (int i = adapter.getSelectedItems().size() - 1; i >= 0; i--)
+                                        removeItem(adapter.remove(adapter.getSelectedItems().get(i)));
+                                }
+                            })
+                            .setNegativeButton(android.R.string.cancel, null)
+                            .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                @Override
+                                public void onDismiss(DialogInterface dialog) {
+                                    actionMode.finish();
+                                }
+                            })
+                            .show();
+                    return true;
+            }
+            return false;
+        }
+
+        @Override
+        public void onDestroyActionMode(ActionMode mode) {
+            actionMode = null;
+            adapter.clearSelections();
+            add.show();
+        }
+    };
 
     @Nullable
     @Override
@@ -50,6 +109,39 @@ public class ItemsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         final RecyclerView items = (RecyclerView) view.findViewById(R.id.items);
         items.setAdapter(adapter);
+
+        final GestureDetector gestureDetector = new GestureDetector(getActivity(), new GestureDetector.SimpleOnGestureListener() {
+            @Override
+            public void onLongPress(MotionEvent e) {
+                if (actionMode == null) {
+                    actionMode = ((AppCompatActivity) getActivity()).startSupportActionMode(actionModeCallback);
+                    toggleSelection(e, items);
+                }
+            }
+
+            @Override
+            public boolean onSingleTapConfirmed(MotionEvent e) {
+                if (actionMode != null) {
+                    toggleSelection(e, items);
+                }
+                return super.onSingleTapConfirmed(e);
+            }
+        });
+        items.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return gestureDetector.onTouchEvent(event);
+            }
+
+        });
+
+        refresh = (SwipeRefreshLayout) view.findViewById(R.id.refresh);
+        refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadItems();
+            }
+        });
 
         add = (FloatingActionButton) view.findViewById(R.id.add);
         add.setOnClickListener(new View.OnClickListener() {
@@ -64,6 +156,11 @@ public class ItemsFragment extends Fragment {
         api = ((LSApp) getActivity().getApplication()).api();
 
         loadItems();     
+    }
+
+    private void toggleSelection(MotionEvent e, RecyclerView items) {
+        adapter.toggleSelection(items.getChildLayoutPosition(items.findChildViewUnder(e.getX(), e.getY())));
+        actionMode.setTitle(adapter.getSelectedItems().size() + " выбрано");
     }
 
     private void addItem() {
@@ -123,11 +220,39 @@ public class ItemsFragment extends Fragment {
                 } else {
                     adapter.clear();
                     adapter.addAll(data);
+                    refresh.setRefreshing(false);
                 }
             }
 
             @Override
             public void onLoaderReset(Loader<List<Item>> loader) {
+            }
+        }).forceLoad();
+    }
+
+    private void removeItem(final Item selectedItemId) {
+        getLoaderManager().initLoader(LODER_REMOVE, null, new LoaderManager.LoaderCallbacks<Result>() {
+            @Override
+            public Loader<Result> onCreateLoader(final int id, Bundle args) {
+                return new AsyncTaskLoader<Result>(getContext()) {
+                    @Override
+                    public Result loadInBackground() {
+                        try {
+                            return api.remove(selectedItemId.id).execute().body();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            return null;
+                        }
+                    }
+                };
+            }
+
+            @Override
+            public void onLoadFinished(Loader<Result> loader, Result data) {
+            }
+
+            @Override
+            public void onLoaderReset(Loader<Result> loader) {
             }
         }).forceLoad();
     }
