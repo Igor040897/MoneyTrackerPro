@@ -8,12 +8,11 @@
     <ImageView
         android:id="@+id/logo"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/info"
-        android:layout_marginTop="46dp"
-        android:layout_marginBottom="@dimen/margin_in_auth"
+        android:layout_height="wrap_content"
         android:contentDescription="Logo"
-        android:src="@drawable/logo" />
+        android:src="@drawable/logo"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/info" />
 
     <TextView
         android:id="@+id/info"
