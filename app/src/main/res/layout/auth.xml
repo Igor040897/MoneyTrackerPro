@@ -8,15 +8,19 @@
     <ImageView
         android:id="@+id/logo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/info"
         android:layout_marginTop="46dp"
+        android:layout_marginBottom="22dp"
         android:contentDescription="Logo"
         android:src="@drawable/logo" />
 
     <TextView
+        android:id="@+id/info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/auth"
+        android:layout_marginTop="22dp"
         android:layout_marginBottom="30dp"
         android:textColor="@android:color/white"
         android:gravity="center"
