@@ -28,4 +28,7 @@ public interface LSApi {
     @Headers("Content-Type: application/json")
     @POST("items/remove")
     Call<Result> remove(@Query("id") int id);
+
+    @GET("auth")
+    Call<AuthResult> auth(@Query("social_user_id") String socialUserId);
 }
