@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/info"
         android:layout_marginTop="46dp"
-        android:layout_marginBottom="22dp"
+        android:layout_marginBottom="@dimen/margin_in_auth"
         android:contentDescription="Logo"
         android:src="@drawable/logo" />
 
@@ -19,8 +19,9 @@
         android:id="@+id/info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_info"
         android:layout_above="@+id/auth"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="@dimen/margin_in_auth"
         android:layout_marginBottom="30dp"
         android:textColor="@android:color/white"
         android:gravity="center"
