@@ -7,7 +7,7 @@
 
 
     <TextView
-        android:id="@+id/balance"
+        android:id="@+id/screenAuth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -22,7 +22,7 @@
         android:id="@+id/balance_caption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/balance"
+        android:layout_below="@id/screenAuth"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
         android:text="@string/your_balance"
