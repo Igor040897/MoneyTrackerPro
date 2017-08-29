@@ -158,21 +158,28 @@ public class ItemsFragment extends Fragment {
         loadItems();     
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (adapter.getItemCount() == 0 && type.equals(Item.TYPE_INCOME)) {
+            loadItems();
+        }
+    }
+
     private void toggleSelection(MotionEvent e, RecyclerView items) {
         adapter.toggleSelection(items.getChildLayoutPosition(items.findChildViewUnder(e.getX(), e.getY())));
         actionMode.setTitle(adapter.getSelectedItems().size() + " выбрано");
     }
 
-    private void addItem() {
+    private void addItem(final Item item) {
         getLoaderManager().initLoader(LODER_ADD, null, new LoaderManager.LoaderCallbacks<AddResult>() {
-
             @Override
             public Loader<AddResult> onCreateLoader(int id, Bundle args) {
                 return new AsyncTaskLoader<AddResult>(getContext()) {
                     @Override
                     public AddResult loadInBackground() {
                         try {
-                            return api.add("Планшет", 60000, type).execute().body();
+                            return api.add(item.name, item.price, item.type).execute().body();
                         } catch (IOException e) {
                             e.printStackTrace();
                             return null;
@@ -186,14 +193,14 @@ public class ItemsFragment extends Fragment {
                 if (data == null) {
                     Toast.makeText(getContext(), R.string.error, Toast.LENGTH_SHORT).show();
                 } else {
-                    adapter.add(data);
+                    adapter.add(item);
                 }
             }
 
             @Override
             public void onLoaderReset(Loader<AddResult> loader) {
             }
-        });
+        }).forceLoad();
     }
 
     private void loadItems() {
@@ -261,7 +268,9 @@ public class ItemsFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == RC_ADD_ITEM && resultCode == RESULT_OK) {
             Item item = (Item) data.getParcelableExtra(AddItemActivity.RESULT_ITEM);
+            addItem(item);
             Toast.makeText(getContext(), item.name, Toast.LENGTH_LONG).show();
+
         }
     }
 }

@@ -36,7 +36,7 @@ public class BalanceFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        balance = (TextView) view.findViewById(R.id.balance);
+        balance = (TextView) view.findViewById(R.id.screenAuth);
         expense = (TextView) view.findViewById(R.id.expense);
         income = (TextView) view.findViewById(R.id.income);
         diagram = (DiagramView) view.findViewById(R.id.diagram);
