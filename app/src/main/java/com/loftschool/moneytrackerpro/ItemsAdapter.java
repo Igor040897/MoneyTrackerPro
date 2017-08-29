@@ -7,8 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.loftschool.moneytrackerpro.API.AddResult;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,8 +44,8 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHolder> {
         notifyDataSetChanged();
     }
 
-    public void add(AddResult data) {
-        data.isSuccess();
+    public void add(Item item) {
+        items.add(item);
         notifyDataSetChanged();
     }
 
@@ -58,6 +56,9 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHolder> {
     }
 
     void toggleSelection(int pos) {
+        if (pos == -1) {
+            return;
+        }
         if (selectedItems.get(pos, false)) {
             selectedItems.delete(pos);
         } else {
