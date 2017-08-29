@@ -8,5 +8,10 @@
     <dimen name="margin_medium">13dp</dimen>
     <dimen name="fab">56dp</dimen>
     <dimen name="text_size_info">14sp</dimen>
-    <dimen name="margin_in_auth">22dp</dimen>
+    <dimen name="margin_in_auth">22dp</dimen> 
+
+    <dimen name="text_medium">16sp</dimen>
+    <dimen name="text_large">24sp</dimen>
+    <dimen name="text_xlarge">30sp</dimen>
+    <dimen name="text_xxlarge">48sp</dimen>
 </resources>

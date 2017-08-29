@@ -11,6 +11,11 @@
     <string name="new_item">Новая запись</string>
     <string name="confirm_remove">Уверен?</string>
 
+    <string name="your_balance">ваш баланс</string>
+    <string name="expense">расход</string>
+    <string name="income">доход</string>
+    <string name="price">%1$d \u20bd</string>
+
     <array name="main_pager_titles">
         <item>@string/expenses</item>
         <item>@string/incomes</item>
