@@ -1,4 +1,4 @@
-package com.loftschool.moneytrackerpro;
+package com.loftschool.moneytrackerpro.API;
 
 import android.os.Parcel;
 import android.os.Parcelable;

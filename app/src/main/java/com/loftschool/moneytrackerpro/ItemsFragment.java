@@ -24,6 +24,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.loftschool.moneytrackerpro.API.AddResult;
+import com.loftschool.moneytrackerpro.API.Item;
 import com.loftschool.moneytrackerpro.API.LSApi;
 import com.loftschool.moneytrackerpro.API.Result;
 

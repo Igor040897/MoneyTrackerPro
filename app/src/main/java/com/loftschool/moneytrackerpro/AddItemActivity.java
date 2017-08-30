@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.loftschool.moneytrackerpro.API.Item;
+
 public class AddItemActivity extends AppCompatActivity {
     public static final String EXTRA_TYPE = "type";
     public static final String RESULT_ITEM = "item";
