@@ -76,7 +76,7 @@
         android:textSize="@dimen/text_medium"
         app:layout_widthPercent="50%" />
 
-    <com.loftschool.moneytrackerpro.DiagramView
+    <com.igor040897.moneytrackerpro.DiagramView
         android:id="@+id/diagram"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
