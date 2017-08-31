@@ -1,7 +1,9 @@
 {
   "project_info": {
     "project_number": "146861305918",
-    "project_id": "money-tracker-5be14"
+    "firebase_url": "https://money-tracker-5be14.firebaseio.com",
+    "project_id": "money-tracker-5be14",
+    "storage_bucket": "money-tracker-5be14.appspot.com"
   },
   "client": [
     {
@@ -13,16 +15,36 @@
       },
       "oauth_client": [
         {
-          "client_id": "146861305918-hme2i98i7940u4f69u0nmkqrluupuni7.apps.googleusercontent.com",
+          "client_id": "146861305918-bilrcuj54badtv729l0707nv0uh4ilfs.apps.googleusercontent.com",
           "client_type": 3
         },
         {
-          "client_id": "146861305918-tbt2ln2778f79i9gh1956cdrjlrmjpt7.apps.googleusercontent.com",
+          "client_id": "146861305918-i1ohgdv1bkvtjg0ulkjuj2krot99gtba.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.igor040897.moneytrackerpro",
-            "certificate_hash": "d287b04e3c8241e7464dda2ce4ec69379cac6d6d"
+            "certificate_hash": "df0f91f12cecf485e6d64922d852303cb0989b38"
           }
+        },
+        {
+          "client_id": "146861305918-k6rgei062id4hhrk7na0v3b880pro36r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.igor040897.moneytrackerpro",
+            "certificate_hash": "5965636aa390d7a68cdf1d5ae15d0ebfa9502f3c"
+          }
+        },
+        {
+          "client_id": "146861305918-s36ttsbqgtjlhda46bod31o6l6kdk5dt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.igor040897.moneytrackerpro",
+            "certificate_hash": "3c7af4d0834484534004932f1d541bdc10fdd752"
+          }
+        },
+        {
+          "client_id": "146861305918-hme2i98i7940u4f69u0nmkqrluupuni7.apps.googleusercontent.com",
+          "client_type": 3
         }
       ],
       "api_key": [
@@ -35,11 +57,16 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "146861305918-bilrcuj54badtv729l0707nv0uh4ilfs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
-          "status": 1
+          "status": 2
         }
       }
     }

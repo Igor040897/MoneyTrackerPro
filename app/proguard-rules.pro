@@ -39,3 +39,5 @@
 
 -keep class javax.annotation.** { *; }
 -dontwarn javax.annotation.**
+
+-dontwarn com.squareup.okhttp.**
