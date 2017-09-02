@@ -11,12 +11,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:contentDescription="Logo"
-        android:src="@drawable/logo" />
+        android:src="@drawable/logo"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/info" />
 
     <TextView
+        android:id="@+id/info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_info"
         android:layout_above="@+id/auth"
+        android:layout_marginTop="@dimen/margin_in_auth"
         android:layout_marginBottom="30dp"
         android:textColor="@android:color/white"
         android:gravity="center"
@@ -37,5 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:contentDescription="Intro"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
         android:src="@drawable/bg_intro" />
 </RelativeLayout>
