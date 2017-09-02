@@ -35,9 +35,7 @@
 
 # OKHTTP
 -dontwarn okio.**
--keep class com.igor040897.moneytrackerpro.api.** { *; }
+-keep class com.igor040897.moneytrackerpro.API.** { *; }
 
 -keep class javax.annotation.** { *; }
 -dontwarn javax.annotation.**
-
--dontwarn com.squareup.okhttp.**

@@ -21,19 +21,26 @@ android {
         applicationId "com.igor040897.moneytrackerpro"
         minSdkVersion 19
         targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        versionCode 5
+        versionName "1.0.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.MoneyTracker
     }
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.MoneyTracker
+            proguardFile 'C:/Users/fanre/AndroidStudioProjects/MoneyTrackerPro/app/proguard-rules.pro'
+            debuggable false
+            zipAlignEnabled true
         }
         debug {
             signingConfig signingConfigs.MoneyTrackerDebug
+            applicationIdSuffix ".debug"
         }
+    }
+    productFlavors {
     }
 }
 

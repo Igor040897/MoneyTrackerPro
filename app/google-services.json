@@ -19,14 +19,6 @@
           "client_type": 3
         },
         {
-          "client_id": "146861305918-i1ohgdv1bkvtjg0ulkjuj2krot99gtba.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.igor040897.moneytrackerpro",
-            "certificate_hash": "df0f91f12cecf485e6d64922d852303cb0989b38"
-          }
-        },
-        {
           "client_id": "146861305918-k6rgei062id4hhrk7na0v3b880pro36r.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
