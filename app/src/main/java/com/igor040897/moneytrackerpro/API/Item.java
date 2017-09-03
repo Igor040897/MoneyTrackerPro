@@ -13,7 +13,7 @@ public class Item implements Parcelable {
 
     public String name, type;
     public int price;
-    public int id;
+    public int id = -1;
 
     public Item(String name, int price, String type) {
         this.name = name;

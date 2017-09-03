@@ -6,9 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.AsyncTaskLoader;
-import android.support.v4.content.Loader;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -28,8 +25,10 @@ import com.igor040897.moneytrackerpro.API.Item;
 import com.igor040897.moneytrackerpro.API.LSApi;
 import com.igor040897.moneytrackerpro.API.Result;
 
-import java.io.IOException;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
 
 import static android.app.Activity.RESULT_OK;
 import static com.igor040897.moneytrackerpro.AddItemActivity.RC_ADD_ITEM;
@@ -179,103 +178,54 @@ public class ItemsFragment extends Fragment {
     }
 
     private void addItem(final Item item) {
-        getLoaderManager().initLoader(item.id, null, new LoaderManager.LoaderCallbacks<AddResult>() {
+        Call<AddResult> call = api.add(item.name, item.price, item.type);
+        call.enqueue(new Callback<AddResult>() {
             @Override
-            public Loader<AddResult> onCreateLoader(int id, Bundle args) {
-                return new AsyncTaskLoader<AddResult>(getContext()) {
-                    @Override
-                    public AddResult loadInBackground() {
-                        try {
-                            return api.add(item.name, item.price, item.type).execute().body();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                            return null;
-                        }
-                    }
-                };
+            public void onResponse(Call<AddResult> call, retrofit2.Response<AddResult> response) {
+                response.body();
+                adapter.add(item);
             }
 
             @Override
-            public void onLoadFinished(Loader<AddResult> loader, AddResult data) {
-                if (data == null) {
-                    Toast.makeText(getContext(), R.string.error, Toast.LENGTH_SHORT).show();
-                } else {
-                    adapter.add(item);
-                    //виправить
-                }
+            public void onFailure(Call<AddResult> call, Throwable t) {
             }
-
-            @Override
-            public void onLoaderReset(Loader<AddResult> loader) {
-            }
-        }).forceLoad();
+        });
     }
 
     private void loadItems() {
-        getLoaderManager().initLoader(LODER_ITEMS, null, new LoaderManager.LoaderCallbacks<List<Item>>() {
+        Call<List<Item>> call = api.items(type);
+        call.enqueue(new Callback<List<Item>>() {
             @Override
-            public Loader<List<Item>> onCreateLoader(int id, Bundle args) {
-                return new AsyncTaskLoader<List<Item>>(getContext()) {
-                    @Override
-                    public List<Item> loadInBackground() {
-                        try {
-                            return api.items(type).execute().body();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            return null;
-                        }
-                    }
-                };
+            public void onResponse(Call<List<Item>> call, retrofit2.Response<List<Item>> response) {
+                adapter.clear();
+                adapter.addAll(response.body());
+                refresh.setRefreshing(false);
             }
 
             @Override
-            public void onLoadFinished(Loader<List<Item>> loader, List<Item> data) {
-                if (data == null) {
-                    Toast.makeText(getContext(), R.string.error, Toast.LENGTH_SHORT).show();
-                } else {
-                    adapter.clear();
-                    adapter.addAll(data);
-                    refresh.setRefreshing(false);
-                }
+            public void onFailure(Call<List<Item>> call, Throwable t) {
             }
-
-            @Override
-            public void onLoaderReset(Loader<List<Item>> loader) {
-            }
-        }).forceLoad();
+        });
     }
 
     private void removeItem(final Item selectedItemId) {
-        getLoaderManager().initLoader(selectedItemId.id, null, new LoaderManager.LoaderCallbacks<Result>() {
+        Call<Result> call = api.remove(selectedItemId.id);
+        call.enqueue(new Callback<Result>() {
             @Override
-            public Loader<Result> onCreateLoader(final int id, Bundle args) {
-                return new AsyncTaskLoader<Result>(getContext()) {
-                    @Override
-                    public Result loadInBackground() {
-                        try {
-                            return api.remove(selectedItemId.id).execute().body();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            return null;
-                        }
-                    }
-                };
+            public void onResponse(Call<Result> call, retrofit2.Response<Result> response) {
+                response.body();
             }
 
             @Override
-            public void onLoadFinished(Loader<Result> loader, Result data) {
+            public void onFailure(Call<Result> call, Throwable t) {
             }
-
-            @Override
-            public void onLoaderReset(Loader<Result> loader) {
-            }
-        }).forceLoad();
+        });
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == RC_ADD_ITEM && resultCode == RESULT_OK) {
-            Item item = (Item) data.getParcelableExtra(AddItemActivity.RESULT_ITEM);
+            final Item item = (Item) data.getParcelableExtra(AddItemActivity.RESULT_ITEM);
             addItem(item);
             Toast.makeText(getContext(), item.name, Toast.LENGTH_LONG).show();
 
