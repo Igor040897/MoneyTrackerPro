@@ -87,6 +87,12 @@ public class ItemsFragment extends Fragment {
                             })
                             .show();
                     return true;
+                case R.id.menu_repeat:
+                    for (int i = adapter.getSelectedItems().size() - 1; i >= 0; i--) {
+                        addItem(adapter.addRepeat(adapter.getSelectedItems().get(i)));
+                    }//виправить
+                    actionMode.finish();
+                    return true;
             }
             return false;
         }
@@ -173,7 +179,7 @@ public class ItemsFragment extends Fragment {
     }
 
     private void addItem(final Item item) {
-        getLoaderManager().initLoader(LODER_ADD, null, new LoaderManager.LoaderCallbacks<AddResult>() {
+        getLoaderManager().initLoader(item.id, null, new LoaderManager.LoaderCallbacks<AddResult>() {
             @Override
             public Loader<AddResult> onCreateLoader(int id, Bundle args) {
                 return new AsyncTaskLoader<AddResult>(getContext()) {
@@ -195,6 +201,7 @@ public class ItemsFragment extends Fragment {
                     Toast.makeText(getContext(), R.string.error, Toast.LENGTH_SHORT).show();
                 } else {
                     adapter.add(item);
+                    //виправить
                 }
             }
 
@@ -239,7 +246,7 @@ public class ItemsFragment extends Fragment {
     }
 
     private void removeItem(final Item selectedItemId) {
-        getLoaderManager().initLoader(LODER_REMOVE, null, new LoaderManager.LoaderCallbacks<Result>() {
+        getLoaderManager().initLoader(selectedItemId.id, null, new LoaderManager.LoaderCallbacks<Result>() {
             @Override
             public Loader<Result> onCreateLoader(final int id, Bundle args) {
                 return new AsyncTaskLoader<Result>(getContext()) {

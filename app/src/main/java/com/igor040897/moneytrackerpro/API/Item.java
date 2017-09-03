@@ -12,8 +12,8 @@ public class Item implements Parcelable {
     public static final String TYPE_INCOME = "income";
 
     public String name, type;
-    public int id, price;
-
+    public int price;
+    public int id;
 
     public Item(String name, int price, String type) {
         this.name = name;
