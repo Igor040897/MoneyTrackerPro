@@ -51,6 +51,12 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHolder> {
         notifyDataSetChanged();
     }
 
+    Item addRepeat(int pos) {
+        final Item item = items.get(pos);
+        item.id = hashCode();
+        return item;
+    }
+
     Item remove(int pos) {
         final Item item = items.remove(pos);
         notifyItemRemoved(pos);
